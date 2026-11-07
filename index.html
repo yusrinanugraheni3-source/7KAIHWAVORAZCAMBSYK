@@ -169,15 +169,11 @@
 
 
 <script>
-  // URL deployment Apps Script yang tercantum pada kode awal.
-  // Deployment ini harus sudah berisi backend Apps Script yang disertakan.
-  
-const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwthREvdyVzPOEXQvyS2__FcFOqpagKOxJ94Imz3-YFkccDYpsB7G4F-jNnC8G9tNk/exec';
+  // Deployment Web App Version 6 (URL harus sama dengan deployment aktif).
+  const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwthREvdyVzPOEXQvyS2__FcFOqpagKOxJ94Imz3-YFkccDYpsB7G4F-jNnC8G9tNk/exec';
 
   const form = document.getElementById('kaihForm');
   const btn = document.getElementById('btnSubmit');
-
-  // Area status agar pengguna mendapat informasi proses pengiriman.
   const statusBox = document.createElement('p');
   statusBox.id = 'submitStatus';
   statusBox.setAttribute('role', 'status');
@@ -185,7 +181,6 @@ const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwt
   statusBox.style.cssText = 'margin-top:14px;text-align:center;font-weight:600;';
   btn.insertAdjacentElement('afterend', statusBox);
 
-  // Iframe tersembunyi menerima respons dari Apps Script tanpa CORS fetch.
   const frame = document.createElement('iframe');
   frame.name = 'kaihResponseFrame';
   frame.title = 'Respons penyimpanan angket';
@@ -193,40 +188,37 @@ const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwt
   document.body.appendChild(frame);
 
   let sedangMengirim = false;
-  let activeRequestId = '';
+  let timeoutId = null;
 
   window.addEventListener('message', function(event) {
-    // HtmlService dapat mengirim pesan dari frame internal Google.
-    // Cocokkan tipe pesan dan ID pengiriman, bukan event.source.
-    if (!event.data ||
-        event.data.type !== 'KAIH_SUBMIT_RESULT' ||
-        !activeRequestId ||
-        event.data.requestId !== activeRequestId) return;
+    if (event.source !== frame.contentWindow || !event.data ||
+        event.data.type !== 'KAIH_SUBMIT_RESULT') return;
+
+    // Hanya respons dengan requestId pengiriman saat ini yang diterima.
+    if (event.data.requestId !== window.kaihCurrentRequestId) return;
 
     sedangMengirim = false;
-    activeRequestId = '';
+    if (timeoutId) window.clearTimeout(timeoutId);
     btn.disabled = false;
     btn.innerText = 'KIRIM JAWABAN ANGKET';
 
-    if (event.data.success) {
+    if (event.data.success === true) {
       statusBox.style.color = '#166534';
-      statusBox.textContent = event.data.message || 'Alhamdulillah, jawaban berhasil tersimpan. SYUKRON SAHABAT WAVORAZCA';
+      statusBox.textContent = event.data.message || 'Jawaban berhasil disimpan.';
       form.reset();
     } else {
       statusBox.style.color = '#b91c1c';
-      statusBox.textContent = event.data.message || 'Data belum berhasil disimpan. Silakan periksa kembali.';
+      statusBox.textContent = event.data.message || 'Data belum berhasil disimpan.';
     }
   });
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (sedangMengirim) return;
-
     if (!form.reportValidity()) return;
 
-    const formData = new FormData(form);
     const payload = {};
-    formData.forEach((value, key) => {
+    new FormData(form).forEach((value, key) => {
       payload[key] = String(value).trim();
     });
 
@@ -234,27 +226,27 @@ const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwt
       if (!payload['q' + i]) {
         statusBox.style.color = '#b91c1c';
         statusBox.textContent = 'Mohon lengkapi seluruh 45 pernyataan.';
-        const firstMissing = form.querySelector('input[name="q' + i + '"]');
-        if (firstMissing) firstMissing.focus();
+        const missing = form.querySelector('input[name="q' + i + '"]');
+        if (missing) missing.focus();
         return;
       }
     }
 
-    // ID unik agar respons yang diterima cocok dengan pengiriman ini.
-    activeRequestId = 'kaih-' + Date.now() + '-' +
-      Math.random().toString(36).slice(2);
-    payload.requestId = activeRequestId;
+    const requestId = 'KAIH-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
+    payload.requestId = requestId;
+    window.kaihCurrentRequestId = requestId;
 
     sedangMengirim = true;
     btn.disabled = true;
     btn.innerText = 'Mengirim data...';
     statusBox.style.color = '#1d4ed8';
-    statusBox.textContent = 'Sedang mengirim jawaban ke Google Spreadsheet. Mohon tunggu.';
+    statusBox.textContent = 'Sedang mengirim jawaban. Mohon tunggu dan jangan tutup halaman.';
 
     const transport = document.createElement('form');
     transport.method = 'POST';
     transport.action = SCRIPT_URL;
     transport.target = frame.name;
+    transport.acceptCharset = 'UTF-8';
     transport.style.display = 'none';
 
     const hidden = document.createElement('input');
@@ -262,21 +254,18 @@ const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbwt
     hidden.name = 'payload';
     hidden.value = JSON.stringify(payload);
     transport.appendChild(hidden);
-
     document.body.appendChild(transport);
     transport.submit();
     transport.remove();
 
-    window.setTimeout(function() {
-      if (sedangMengirim && activeRequestId === payload.requestId) {
-        sedangMengirim = false;
-        activeRequestId = '';
-        btn.disabled = false;
-        btn.innerText = 'KIRIM JAWABAN ANGKET';
-        statusBox.style.color = '#b91c1c';
-        statusBox.textContent = 'Belum menerima konfirmasi dari Apps Script. Periksa tab Data 7KAIH sebelum mencoba kembali agar tidak terjadi pengiriman ganda.';
-      }
-    }, 30000);
+    timeoutId = window.setTimeout(function() {
+      if (!sedangMengirim) return;
+      sedangMengirim = false;
+      btn.disabled = false;
+      btn.innerText = 'KIRIM JAWABAN ANGKET';
+      statusBox.style.color = '#b91c1c';
+      statusBox.textContent = 'Belum menerima konfirmasi. Periksa tab Data 7KAIH sebelum mencoba lagi agar tidak terjadi pengiriman ganda.';
+    }, 45000);
   });
 </script>
 
