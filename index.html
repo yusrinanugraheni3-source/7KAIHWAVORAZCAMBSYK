@@ -24,6 +24,16 @@
         button[type="submit"] { width: 100%; background-color: var(--secondary-color); color: #ffffff; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
         button[type="submit"]:hover { background-color: #1d4ed8; }
         button:disabled { background-color: #9ca3af; cursor: not-allowed; }
+    
+        #submitStatus { line-height: 1.5; }
+        @media (max-width: 640px) {
+            body { padding: 10px; }
+            .container { padding: 18px 14px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .options-group { flex-wrap: wrap; gap: 8px; }
+            .options-group label { padding: 8px 10px; }
+            h1 { font-size: 19px; }
+        }
     </style>
 </head>
 <body>
@@ -157,41 +167,108 @@
     </form>
 </div>
 
+
 <script>
-    // TEMPELKAN URL WEB APP DARI APPS SCRIPT DI SINI
-    const SCRIPT_URL = 'AKfycbwW4SUbdKXzwdXyJKlgscsZhifXJhmlL1XocaGUmo8';
+  // URL deployment Apps Script terbaru yang diberikan pengguna.
+  const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbzcioTe3LkRv_qjel3ilE0uLMnew7jAqVetixZhDDJau-hz7WfQh57sfOiCxAfGI9Fr/exec';
 
-    document.getElementById('kaihForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const btn = document.getElementById('btnSubmit');
-        btn.disabled = true;
-        btn.innerText = 'Mengirim data ke Google Spreadsheet...';
+  const form = document.getElementById('kaihForm');
+  const btn = document.getElementById('btnSubmit');
 
-        const formData = new FormData(this);
-        const payload = {};
-        formData.forEach((val, key) => { payload[key] = val; });
+  // Area status agar pengguna mendapat informasi proses pengiriman.
+  const statusBox = document.createElement('p');
+  statusBox.id = 'submitStatus';
+  statusBox.setAttribute('role', 'status');
+  statusBox.setAttribute('aria-live', 'polite');
+  statusBox.style.cssText = 'margin-top:14px;text-align:center;font-weight:600;';
+  btn.insertAdjacentElement('afterend', statusBox);
 
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(() => {
-            alert('Alhamdulillah, pengisian instrumen 7KAIH telah berhasil tersimpan!');
-            document.getElementById('kaihForm').reset();
-            btn.disabled = false;
-            btn.innerText = 'KIRIM JAWABAN ANGKET';
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            alert('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
-            btn.disabled = false;
-            btn.innerText = 'KIRIM JAWABAN ANGKET';
-        });
+  // Iframe tersembunyi menerima respons dari Apps Script tanpa CORS fetch.
+  const frame = document.createElement('iframe');
+  frame.name = 'kaihResponseFrame';
+  frame.title = 'Respons penyimpanan angket';
+  frame.style.display = 'none';
+  document.body.appendChild(frame);
+
+  let sedangMengirim = false;
+
+  window.addEventListener('message', function(event) {
+    // Pesan hanya diterima dari iframe pengiriman milik halaman ini.
+    if (event.source !== frame.contentWindow || !event.data ||
+        event.data.type !== 'KAIH_SUBMIT_RESULT') return;
+
+    sedangMengirim = false;
+    btn.disabled = false;
+    btn.innerText = 'KIRIM JAWABAN ANGKET';
+
+    if (event.data.success) {
+      statusBox.style.color = '#166534';
+      statusBox.textContent = event.data.message || 'Alhamdulillah, jawaban berhasil tersimpan.';
+      form.reset();
+    } else {
+      statusBox.style.color = '#b91c1c';
+      statusBox.textContent = event.data.message || 'Data belum berhasil disimpan. Silakan coba lagi.';
+    }
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (sedangMengirim) return;
+
+    if (!form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const payload = {};
+    formData.forEach((value, key) => {
+      payload[key] = String(value).trim();
     });
+
+    // Pastikan semua 45 butir terisi sebelum data dikirim.
+    for (let i = 1; i <= 45; i++) {
+      if (!payload['q' + i]) {
+        statusBox.style.color = '#b91c1c';
+        statusBox.textContent = 'Mohon lengkapi seluruh 45 pernyataan.';
+        const firstMissing = form.querySelector('input[name="q' + i + '"]');
+        if (firstMissing) firstMissing.focus();
+        return;
+      }
+    }
+
+    sedangMengirim = true;
+    btn.disabled = true;
+    btn.innerText = 'Mengirim data...';
+    statusBox.style.color = '#1d4ed8';
+    statusBox.textContent = 'Sedang mengirim jawaban ke Google Spreadsheet. Mohon tunggu.';
+
+    const transport = document.createElement('form');
+    transport.method = 'POST';
+    transport.action = SCRIPT_URL;
+    transport.target = frame.name;
+    transport.style.display = 'none';
+
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = 'payload';
+    hidden.value = JSON.stringify(payload);
+    transport.appendChild(hidden);
+
+    document.body.appendChild(transport);
+    transport.submit();
+    transport.remove();
+
+    // Jika server tidak merespons, jangan menyatakan data berhasil.
+    window.setTimeout(function() {
+      if (sedangMengirim) {
+        sedangMengirim = false;
+        btn.disabled = false;
+        btn.innerText = 'KIRIM JAWABAN ANGKET';
+        statusBox.style.color = '#b91c1c';
+        statusBox.textContent = 'Belum menerima konfirmasi dari server. Periksa koneksi dan konfigurasi Apps Script sebelum mengirim ulang.';
+      }
+    }, 25000);
+  });
 </script>
+
 
 </body>
 </html>
