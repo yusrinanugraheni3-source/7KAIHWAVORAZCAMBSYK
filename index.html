@@ -169,9 +169,7 @@
 
 
 <script>
-  // URL Deployment Web App Anda
   const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbz28B5fhUMi06_YucYD3m4FUI-CKbloT6Xf4Z_K6_mVMZbdW8N6P7gPEvUj4oFFOYD5/exec';
-  
   const form = document.getElementById('kaihForm');
   const btn = document.getElementById('btnSubmit');
   
@@ -187,14 +185,17 @@
     if (sedangMengirim) return;
     if (!form.reportValidity()) return;
 
-    const payload = {};
-    new FormData(form).forEach((value, key) => {
-      payload[key] = String(value).trim();
-    });
+    // Menggunakan URLSearchParams agar data pasti terbaca oleh e.parameter di Apps Script
+    const formData = new FormData(form);
+    const searchParams = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      searchParams.append(key, String(value).trim());
+    }
 
     // Validasi kelengkapan 45 soal
     for (let i = 1; i <= 45; i++) {
-      if (!payload['q' + i]) {
+      if (!searchParams.get('q' + i)) {
         statusBox.style.color = '#b91c1c';
         statusBox.textContent = 'Mohon lengkapi seluruh 45 pernyataan.';
         const missing = form.querySelector('input[name="q' + i + '"]');
@@ -203,24 +204,23 @@
       }
     }
 
-    payload.requestId = 'KAIH-' + Date.now();
+    searchParams.append('requestId', 'KAIH-' + Date.now());
+
     sedangMengirim = true;
     btn.disabled = true;
     btn.innerText = 'Mengirim data...';
     statusBox.style.color = '#1d4ed8';
     statusBox.textContent = 'Sedang menyimpan jawaban ke database...';
 
-    // Pengiriman data langsung ke Google Sheets (Mode no-cors)
     fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
-      body: JSON.stringify(payload)
+      body: searchParams.toString()
     })
     .then(() => {
-      // Langsung berikan respon sukses dan bersihkan form
       sedangMengirim = false;
       btn.disabled = false;
       btn.innerText = 'KIRIM JAWABAN ANGKET';
