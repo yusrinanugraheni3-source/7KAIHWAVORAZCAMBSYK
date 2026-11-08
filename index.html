@@ -185,17 +185,16 @@
     if (sedangMengirim) return;
     if (!form.reportValidity()) return;
 
-    // Menggunakan URLSearchParams agar data pasti terbaca oleh e.parameter di Apps Script
+    const payload = {};
     const formData = new FormData(form);
-    const searchParams = new URLSearchParams();
 
-    for (const [key, value] of formData.entries()) {
-      searchParams.append(key, String(value).trim());
-    }
+    formData.forEach((value, key) => {
+      payload[key] = String(value).trim();
+    });
 
     // Validasi kelengkapan 45 soal
     for (let i = 1; i <= 45; i++) {
-      if (!searchParams.get('q' + i)) {
+      if (!payload['q' + i]) {
         statusBox.style.color = '#b91c1c';
         statusBox.textContent = 'Mohon lengkapi seluruh 45 pernyataan.';
         const missing = form.querySelector('input[name="q' + i + '"]');
@@ -204,7 +203,7 @@
       }
     }
 
-    searchParams.append('requestId', 'KAIH-' + Date.now());
+    payload.requestId = 'KAIH-' + Date.now();
 
     sedangMengirim = true;
     btn.disabled = true;
@@ -212,13 +211,14 @@
     statusBox.style.color = '#1d4ed8';
     statusBox.textContent = 'Sedang menyimpan jawaban ke database...';
 
+    // Pengiriman JSON dengan mode no-cors
     fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'text/plain;charset=utf-8'
       },
-      body: searchParams.toString()
+      body: JSON.stringify(payload)
     })
     .then(() => {
       sedangMengirim = false;
@@ -237,7 +237,6 @@
     });
   });
 </script>
-
 
 </body>
 </html>
