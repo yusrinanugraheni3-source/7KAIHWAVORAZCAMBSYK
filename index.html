@@ -1,242 +1,301 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instrumen Asesmen Profil 7KAIH Santri MBS Sleman</title>
-    <style>
-        :root { --primary-color: #1e3a8a; --secondary-color: #2563eb; --bg-color: #f3f4f6; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); margin: 0; padding: 20px; color: #1f2937; }
-        .container { max-width: 900px; background: #ffffff; padding: 35px; margin: 0 auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        h1 { text-align: center; color: var(--primary-color); font-size: 22px; margin-bottom: 5px; text-transform: uppercase; }
-        h2 { text-align: center; color: #4b5563; font-size: 15px; margin-top: 0; margin-bottom: 25px; font-weight: 500; }
-        .instructions { background: #eff6ff; border-left: 4px solid var(--secondary-color); padding: 15px; margin-bottom: 25px; border-radius: 4px; font-size: 14px; line-height: 1.6; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group { margin-bottom: 15px; }
-        label.form-label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
-        input[type="text"], input[type="date"], select { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        .section-header { background: var(--primary-color); color: #ffffff; padding: 12px 18px; font-weight: bold; border-radius: 6px; margin-top: 30px; margin-bottom: 15px; font-size: 15px; }
-        .question-card { background: #f9fafb; border: 1px solid #e5e7eb; padding: 16px; border-radius: 8px; margin-bottom: 15px; }
-        .question-text { font-size: 14px; font-weight: 500; margin-bottom: 12px; line-height: 1.5; }
-        .options-group { display: flex; gap: 20px; }
-        .options-group label { font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 14px; background: #fff; padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 4px; }
-        .options-group input[type="radio"] { cursor: pointer; }
-        button[type="submit"] { width: 100%; background-color: var(--secondary-color); color: #ffffff; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
-        button[type="submit"]:hover { background-color: #1d4ed8; }
-        button:disabled { background-color: #9ca3af; cursor: not-allowed; }
-    
-        #submitStatus { line-height: 1.5; }
-        @media (max-width: 640px) {
-            body { padding: 10px; }
-            .container { padding: 18px 14px; }
-            .grid-2 { grid-template-columns: 1fr; gap: 0; }
-            .options-group { flex-wrap: wrap; gap: 8px; }
-            .options-group label { padding: 8px 10px; }
-            h1 { font-size: 19px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumen Angket 7KAIH MBS Sleman</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .glass-header { background: linear-gradient(135deg, #0f766e 0%, #0369a1 100%); }
+  </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
 
-<div class="container">
-    <h1>Instrumen Asesmen Profil 7KAIH</h1>
-    <h2>7 Kebiasaan Anak Indonesia Hebat | Santri SMA MBS Sleman Yogyakarta</h2>
-
-    <div class="instructions">
-        <strong>PETUNJUK PENGERJAAN ANGKET:</strong><br>
-        1. Angket ini terdiri atas 45 butir pernyataan khusus santri SMA/MA.<br>
-        2. Alokasi waktu pengerjaan pemetaan profil ini adalah 35–45 menit.<br>
-        3. Pilihlah salah satu dari 4 pilihan jawaban yang paling menggambarkan kebiasaan harian Anda:<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<strong>TP</strong> (Tidak Pernah) | <strong>KD</strong> (Kadang-kadang) | <strong>SR</strong> (Sering) | <strong>SL</strong> (Selalu)<br>
-        4. Jawablah secara jujur dan objektif (tidak mempengaruhi nilai akademik).
+  <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+    
+    <!-- Header Banner -->
+    <div class="glass-header p-6 sm:p-8 text-white relative">
+      <div class="inline-block bg-emerald-500/30 text-emerald-100 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+        Vertical Competition
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">INSTRUMEN ASESMEN PROFIL 7KAIH</h1>
+      <p class="text-sky-100 text-sm sm:text-base mt-1">7 Kebiasaan Anak Indonesia Hebat | Santri SMA MBS Sleman Yogyakarta</p>
     </div>
 
-    <form id="kaihForm">
-        <!-- IDENTITAS SANTRI -->
-        <div class="grid-2">
-            <div class="form-group">
-                <label class="form-label" for="nama">Nama Santri:</label>
-                <input type="text" id="nama" name="nama" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="kelas">Kelas / Program:</label>
-                <input type="text" id="kelas" name="kelas" placeholder="Contoh: 10 IPA 1" required>
-            </div>
+    <!-- Petunjuk Pengerjaan -->
+    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 sm:p-5 m-6 rounded-r-lg text-amber-900 text-xs sm:text-sm space-y-1">
+      <p class="font-bold text-amber-950 text-sm sm:text-base mb-1">📋 Petunjuk Pengerjaan Angket:</p>
+      <p>1. Angket terdiri dari 45 butir pernyataan untuk santri SMA/MA Kelas 10, 11, dan 12 (Alokasi: 35-45 menit).</p>
+      <p>2. Pilihlah salah satu opsi: <strong>TP</strong> (Tidak Pernah), <strong>KD</strong> (Kadang-kadang), <strong>SR</strong> (Sering), atau <strong>SL</strong> (Selalu).</p>
+      <p>3. Jawablah secara jujur dan objektif, jawaban tidak mempengaruhi nilai akademik.</p>
+    </div>
+
+    <form id="angketForm" class="p-6 sm:p-8 space-y-8">
+      
+      <!-- DATA DIRI SANTRI -->
+      <div class="border-b border-slate-200 pb-6">
+        <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <span class="w-7 h-7 bg-sky-600 text-white rounded-full flex items-center justify-center text-xs">1</span>
+          Identitas Santri
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap Santri *</label>
+            <input type="text" name="namaSantri" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas / Program *</label>
+            <input type="text" name="kelasProgram" placeholder="Contoh: 10 IPA 1 / Diniyah" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">NIS / NISN *</label>
+            <input type="text" name="nisNisn" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Asrama / Kamar *</label>
+            <input type="text" name="asramaKamar" placeholder="Contoh: Abu Bakar / Room 3" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Tanggal Pengisian *</label>
+            <input type="date" name="tanggalPengisian" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Jenis Kelamin *</label>
+            <select name="jenisKelamin" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none">
+              <option value="">-- Pilih Jenis Kelamin --</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
         </div>
+      </div>
 
-        <div class="grid-2">
-            <div class="form-group">
-                <label class="form-label" for="nis">NIS / NISN:</label>
-                <input type="text" id="nis" name="nis" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="asrama">Asrama / Kamar:</label>
-                <input type="text" id="asrama" name="asrama" required>
-            </div>
-        </div>
+      <!-- CONTAINER SOAL -->
+      <div id="questionsContainer" class="space-y-8">
+        <!-- Soal di-render otomatis melalui JavaScript -->
+      </div>
 
-        <div class="grid-2">
-            <div class="form-group">
-                <label class="form-label" for="tanggal">Tanggal Pengisian:</label>
-                <input type="date" id="tanggal" name="tanggal" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="jenis_kelamin">Jenis Kelamin:</label>
-                <select id="jenis_kelamin" name="jenis_kelamin" required>
-                    <option value="">-- Pilih Jenis Kelamin --</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- I. DIMENSI BANGUN PAGI -->
-        <div class="section-header">I. DIMENSI BANGUN PAGI (BUILDING MORNING DISCIPLINE)</div>
-        
-        <div class="question-card"><div class="question-text">1. Saya bangun secara mandiri sebelum azan Subuh berkumandang untuk melaksanakan Salat Qiyamul Lail. (+)</div><div class="options-group"><label><input type="radio" name="q1" value="TP" required> TP</label><label><input type="radio" name="q1" value="KD"> KD</label><label><input type="radio" name="q1" value="SR"> SR</label><label><input type="radio" name="q1" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">2. Saya segera merapikan kasur, bantal, dan perlengkapan tidur sendiri tanpa perlu diingatkan musyrif. (+)</div><div class="options-group"><label><input type="radio" name="q2" value="TP" required> TP</label><label><input type="radio" name="q2" value="KD"> KD</label><label><input type="radio" name="q2" value="SR"> SR</label><label><input type="radio" name="q2" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">3. Saya menyapa teman dan ustaz/ah di pagi hari menggunakan kalimat santun berbahasa Arab atau Inggris (misal: "Sabahal khair" / "Good morning"). (+)</div><div class="options-group"><label><input type="radio" name="q3" value="TP" required> TP</label><label><input type="radio" name="q3" value="KD"> KD</label><label><input type="radio" name="q3" value="SR"> SR</label><label><input type="radio" name="q3" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">4. Saya sudah siap berpakaian rapi dan tiba di masjid 15 menit sebelum waktu Subuh dimulai. (+)</div><div class="options-group"><label><input type="radio" name="q4" value="TP" required> TP</label><label><input type="radio" name="q4" value="KD"> KD</label><label><input type="radio" name="q4" value="SR"> SR</label><label><input type="radio" name="q4" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">5. Saya sering merasa berat untuk bangun pagi sehingga butuh dibangunkan berulang kali oleh teman atau musyrif. (-)</div><div class="options-group"><label><input type="radio" name="q5" value="TP" required> TP</label><label><input type="radio" name="q5" value="KD"> KD</label><label><input type="radio" name="q5" value="SR"> SR</label><label><input type="radio" name="q5" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">6. Saya meninggalkan tempat tidur dalam kondisi berantakan karena terburu-buru mengejar waktu Subuh. (-)</div><div class="options-group"><label><input type="radio" name="q6" value="TP" required> TP</label><label><input type="radio" name="q6" value="KD"> KD</label><label><input type="radio" name="q6" value="SR"> SR</label><label><input type="radio" name="q6" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">7. Saya merasa enggan mengucapkan sapaan pagi atau menggunakan kosakata bahasa asing saat berinteraksi di pagi hari. (-)</div><div class="options-group"><label><input type="radio" name="q7" value="TP" required> TP</label><label><input type="radio" name="q7" value="KD"> KD</label><label><input type="radio" name="q7" value="SR"> SR</label><label><input type="radio" name="q7" value="SL"> SL</label></div></div>
-
-        <!-- II. DIMENSI BERIBADAH -->
-        <div class="section-header">II. DIMENSI BERIBADAH (DEVOTIONAL EXCELLENCE & TAHFIDZ)</div>
-        
-        <div class="question-card"><div class="question-text">8. Saya melaksanakan salat fardhu lima waktu secara berjamaah di masjid tepat pada waktunya di shaf terdepan. (+)</div><div class="options-group"><label><input type="radio" name="q8" value="TP" required> TP</label><label><input type="radio" name="q8" value="KD"> KD</label><label><input type="radio" name="q8" value="SR"> SR</label><label><input type="radio" name="q8" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">9. Saya istiqamah menambah hafalan Al-Qur'an baru dan melakukan muraja'ah mandiri sesuai target halqah tahfidz. (+)</div><div class="options-group"><label><input type="radio" name="q9" value="TP" required> TP</label><label><input type="radio" name="q9" value="KD"> KD</label><label><input type="radio" name="q9" value="SR"> SR</label><label><input type="radio" name="q9" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">10. Saya merutinkan pembacaan Surah Al-Waqi'ah & Ar-Rahman di sore hari, Surah Al-Kahfi pada Kamis malam, serta Al-Ma'tsurat setiap Jumat sore. (+)</div><div class="options-group"><label><input type="radio" name="q10" value="TP" required> TP</label><label><input type="radio" name="q10" value="KD"> KD</label><label><input type="radio" name="q10" value="SR"> SR</label><label><input type="radio" name="q10" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">11. Saya membiasakan diri melaksanakan salat sunnah Rawatib dan menjaga adab-adab Islami dalam aktivitas sehari-hari. (+)</div><div class="options-group"><label><input type="radio" name="q11" value="TP" required> TP</label><label><input type="radio" name="q11" value="KD"> KD</label><label><input type="radio" name="q11" value="SR"> SR</label><label><input type="radio" name="q11" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">12. Saya menunda-nunda berwudhu dan berangkat ke masjid ketika panggilan azan sudah berkumandang. (-)</div><div class="options-group"><label><input type="radio" name="q12" value="TP" required> TP</label><label><input type="radio" name="q12" value="KD"> KD</label><label><input type="radio" name="q12" value="SR"> SR</label><label><input type="radio" name="q12" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">13. Saya jarang mengulang (muraja'ah) hafalan Al-Qur'an di luar jam setoran wajib dengan pengampu tahfidz. (-)</div><div class="options-group"><label><input type="radio" name="q13" value="TP" required> TP</label><label><input type="radio" name="q13" value="KD"> KD</label><label><input type="radio" name="q13" value="SR"> SR</label><label><input type="radio" name="q13" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">14. Saya melewakan pembacaan zikir Al-Ma'tsurat atau amalan Surah pilihan yang telah dijadwalkan oleh pihak pesantren. (-)</div><div class="options-group"><label><input type="radio" name="q14" value="TP" required> TP</label><label><input type="radio" name="q14" value="KD"> KD</label><label><input type="radio" name="q14" value="SR"> SR</label><label><input type="radio" name="q14" value="SL"> SL</label></div></div>
-
-        <!-- III. DIMENSI BEROLAHRAGA -->
-        <div class="section-header">III. DIMENSI BEROLAHRAGA (PHYSICAL FITNESS & SPORTSMANSHIP)</div>
-        
-        <div class="question-card"><div class="question-text">15. Saya berpartisipasi aktif dan antusias dalam kegiatan senam bersama atau olah tubuh yang dijadwalkan pesantren. (+)</div><div class="options-group"><label><input type="radio" name="q15" value="TP" required> TP</label><label><input type="radio" name="q15" value="KD"> KD</label><label><input type="radio" name="q15" value="SR"> SR</label><label><input type="radio" name="q15" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">16. Saya menyempatkan waktu untuk berolahraga mandiri (seperti jogging, push-up, atau peregangan) demi menjaga kebugaran tubuh. (+)</div><div class="options-group"><label><input type="radio" name="q16" value="TP" required> TP</label><label><input type="radio" name="q16" value="KD"> KD</label><label><input type="radio" name="q16" value="SR"> SR</label><label><input type="radio" name="q16" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">17. Saya aktif menggunakan kosakata istilah olahraga dalam bahasa Arab/Inggris (seperti "workout", "riyadhah", "stretching") saat beraktivitas fisik. (+)</div><div class="options-group"><label><input type="radio" name="q17" value="TP" required> TP</label><label><input type="radio" name="q17" value="KD"> KD</label><label><input type="radio" name="q17" value="SR"> SR</label><label><input type="radio" name="q17" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">18. Saya menjaga kesehatan dan ketahanan fisik agar senantiasa stamina prima dalam mengikuti rangkaian kegiatan asrama. (+)</div><div class="options-group"><label><input type="radio" name="q18" value="TP" required> TP</label><label><input type="radio" name="q18" value="KD"> KD</label><label><input type="radio" name="q18" value="SR"> SR</label><label><input type="radio" name="q18" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">19. Saya sering mencari alasan atau bermalas-malasan untuk menghindari agenda senam dan kegiatan olahraga di pesantren. (-)</div><div class="options-group"><label><input type="radio" name="q19" value="TP" required> TP</label><label><input type="radio" name="q19" value="KD"> KD</label><label><input type="radio" name="q19" value="SR"> SR</label><label><input type="radio" name="q19" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">20. Saya kurang mempedulikan kebugaran jasmani sehingga tubuh merasa lelah dan kurang bersemangat saat belajar. (-)</div><div class="options-group"><label><input type="radio" name="q20" value="TP" required> TP</label><label><input type="radio" name="q20" value="KD"> KD</label><label><input type="radio" name="q20" value="SR"> SR</label><label><input type="radio" name="q20" value="SL"> SL</label></div></div>
-
-        <!-- IV. DIMENSI MAKAN SEHAT BERGIZI -->
-        <div class="section-header">IV. DIMENSI MAKAN SEHAT BERGIZI (NUTRITION & SUNNAH EATING ADAB)</div>
-        
-        <div class="question-card"><div class="question-text">21. Saya menerapkan adab makan sesuai sunnah Nabi SAW (membaca doa/basmalah, makan dengan tangan kanan, dan duduk tenang). (+)</div><div class="options-group"><label><input type="radio" name="q21" value="TP" required> TP</label><label><input type="radio" name="q21" value="KD"> KD</label><label><input type="radio" name="q21" value="SR"> SR</label><label><input type="radio" name="q21" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">22. Saya memilih jenis makanan dan minuman yang halal, thayyib (baik), serta memperhatikan keseimbangan gizi harian. (+)</div><div class="options-group"><label><input type="radio" name="q22" value="TP" required> TP</label><label><input type="radio" name="q22" value="KD"> KD</label><label><input type="radio" name="q22" value="SR"> SR</label><label><input type="radio" name="q22" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">23. Saya mengambil porsi makan secukupnya dan selalu menghabiskannya tanpa menyisakan makanan sedikit pun (zero food waste). (+)</div><div class="options-group"><label><input type="radio" name="q23" value="TP" required> TP</label><label><input type="radio" name="q23" value="KD"> KD</label><label><input type="radio" name="q23" value="SR"> SR</label><label><input type="radio" name="q23" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">24. Saya menjaga kebersihan area ruang makan (muth'am) dan langsung mencuci alat makan pribadi setelah selesai digunakan. (+)</div><div class="options-group"><label><input type="radio" name="q24" value="TP" required> TP</label><label><input type="radio" name="q24" value="KD"> KD</label><label><input type="radio" name="q24" value="SR"> SR</label><label><input type="radio" name="q24" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">25. Saya sering mengambil porsi makanan terlalu banyak sehingga menyisakan makanan yang akhirnya terbuang sia-sia. (-)</div><div class="options-group"><label><input type="radio" name="q25" value="TP" required> TP</label><label><input type="radio" name="q25" value="KD"> KD</label><label><input type="radio" name="q25" value="SR"> SR</label><label><input type="radio" name="q25" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">26. Saya sering mengonsumsi makanan ringan/jajanan yang kurang sehat secara berlebihan di luar jam makan utama. (-)</div><div class="options-group"><label><input type="radio" name="q26" value="TP" required> TP</label><label><input type="radio" name="q26" value="KD"> KD</label><label><input type="radio" name="q26" value="SR"> SR</label><label><input type="radio" name="q26" value="SL"> SL</label></div></div>
-
-        <!-- V. DIMENSI GEMAR BELAJAR -->
-        <div class="section-header">V. DIMENSI GEMAR BELAJAR (ACADEMIC PASSION & BILINGUAL HABIT)</div>
-        
-        <div class="question-card"><div class="question-text">27. Saya mengikuti seluruh sesi belajar formal di sekolah maupun kelas diniyah di asrama dengan fokus dan penuh ketekunan. (+)</div><div class="options-group"><label><input type="radio" name="q27" value="TP" required> TP</label><label><input type="radio" name="q27" value="KD"> KD</label><label><input type="radio" name="q27" value="SR"> SR</label><label><input type="radio" name="q27" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">28. Saya memiliki inisiatif untuk belajar mandiri dan aktif berdiskusi dalam kelompok (group study) untuk memahami materi. (+)</div><div class="options-group"><label><input type="radio" name="q28" value="TP" required> TP</label><label><input type="radio" name="q28" value="KD"> KD</label><label><input type="radio" name="q28" value="SR"> SR</label><label><input type="radio" name="q28" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">29. Saya disiplin menerapkan pembiasaan percakapan bahasa asing (Bilingual Daily Habit Bahasa Arab & Inggris) setiap hari. (+)</div><div class="options-group"><label><input type="radio" name="q29" value="TP" required> TP</label><label><input type="radio" name="q29" value="KD"> KD</label><label><input type="radio" name="q29" value="SR"> SR</label><label><input type="radio" name="q29" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">30. Saya rajin mencatat poin penting dari pengajaran ustaz/guru dan mengulas kembali (review) catatan pelajaran di waktu senggang. (+)</div><div class="options-group"><label><input type="radio" name="q30" value="TP" required> TP</label><label><input type="radio" name="q30" value="KD"> KD</label><label><input type="radio" name="q30" value="SR"> SR</label><label><input type="radio" name="q30" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">31. Saya mudah merasa bosan, mengantuk, atau kehilangan konsentrasi pada saat proses pembelajaran sedang berlangsung. (-)</div><div class="options-group"><label><input type="radio" name="q31" value="TP" required> TP</label><label><input type="radio" name="q31" value="KD"> KD</label><label><input type="radio" name="q31" value="SR"> SR</label><label><input type="radio" name="q31" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">32. Saya enggan membaca buku atau mengulang pelajaran jika tidak ada instruksi langsung atau jadwal ujian dari guru. (-)</div><div class="options-group"><label><input type="radio" name="q32" value="TP" required> TP</label><label><input type="radio" name="q32" value="KD"> KD</label><label><input type="radio" name="q32" value="SR"> SR</label><label><input type="radio" name="q32" value="SL"> SL</label></div></div>
-
-        <!-- VI. DIMENSI BERMASYARAKAT -->
-        <div class="section-header">VI. DIMENSI BERMASYARAKAT (COMMUNITY ENGAGEMENT & MUHASABAH)</div>
-        
-        <div class="question-card"><div class="question-text">33. Saya aktif bergotong-royong bersama teman-teman dalam menjaga kebersihan, kerapian, dan keasrian lingkungan asrama. (+)</div><div class="options-group"><label><input type="radio" name="q33" value="TP" required> TP</label><label><input type="radio" name="q33" value="KD"> KD</label><label><input type="radio" name="q33" value="SR"> SR</label><label><input type="radio" name="q33" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">34. Saya mengikuti kegiatan evaluasi diri bersama (Muhasabah) setiap malam dengan sungguh-sungguh dan khidmat. (+)</div><div class="options-group"><label><input type="radio" name="q34" value="TP" required> TP</label><label><input type="radio" name="q34" value="KD"> KD</label><label><input type="radio" name="q34" value="SR"> SR</label><label><input type="radio" name="q34" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">35. Saya menunjukkan kepedulian, kepedulian sosial, serta siap membantu sesama santri yang sedang menghadapi kesulitan. (+)</div><div class="options-group"><label><input type="radio" name="q35" value="TP" required> TP</label><label><input type="radio" name="q35" value="KD"> KD</label><label><input type="radio" name="q35" value="SR"> SR</label><label><input type="radio" name="q35" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">36. Saya dapat berkolaborasi dengan baik dalam kelompok dan mampu menunjukkan kepemimpinan yang positif (peer leadership). (+)</div><div class="options-group"><label><input type="radio" name="q36" value="TP" required> TP</label><label><input type="radio" name="q36" value="KD"> KD</label><label><input type="radio" name="q36" value="SR"> SR</label><label><input type="radio" name="q36" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">37. Saya acuh tak acuh dan kurang peduli terhadap kebersihan lingkungan fasilitas umum maupun area bersama di asrama. (-)</div><div class="options-group"><label><input type="radio" name="q37" value="TP" required> TP</label><label><input type="radio" name="q37" value="KD"> KD</label><label><input type="radio" name="q37" value="SR"> SR</label><label><input type="radio" name="q37" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">38. Saya merasa enggan mengikuti atau menganggap tidak penting sesi muhasabah malam bersama teman-teman asrama. (-)</div><div class="options-group"><label><input type="radio" name="q38" value="TP" required> TP</label><label><input type="radio" name="q38" value="KD"> KD</label><label><input type="radio" name="q38" value="SR"> SR</label><label><input type="radio" name="q38" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">39. Saya cenderung bersikap mementingkan diri sendiri dan enggan bekerja sama dalam agenda kebersamaan santri. (-)</div><div class="options-group"><label><input type="radio" name="q39" value="TP" required> TP</label><label><input type="radio" name="q39" value="KD"> KD</label><label><input type="radio" name="q39" value="SR"> SR</label><label><input type="radio" name="q39" value="SL"> SL</label></div></div>
-
-        <!-- VII. DIMENSI TIDUR CEPAT -->
-        <div class="section-header">VII. DIMENSI TIDUR CEPAT (NIGHT SLEEP HYGIENE & LIGHTS OUT)</div>
-        
-        <div class="question-card"><div class="question-text">40. Saya mematuhi jadwal istirahat malam dan siap tidur tepat waktu saat instruksi pemadaman lampu (Lights Out) diberlakukan. (+)</div><div class="options-group"><label><input type="radio" name="q40" value="TP" required> TP</label><label><input type="radio" name="q40" value="KD"> KD</label><label><input type="radio" name="q40" value="SR"> SR</label><label><input type="radio" name="q40" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">41. Saya taat aturan untuk tidak menyimpan atau menggunakan gawai/perangkat elektronik saat jam istirahat malam. (+)</div><div class="options-group"><label><input type="radio" name="q41" value="TP" required> TP</label><label><input type="radio" name="q41" value="KD"> KD</label><label><input type="radio" name="q41" value="SR"> SR</label><label><input type="radio" name="q41" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">42. Saya selalu melakukan adab sebelum tidur secara konsisten (mengambil wudhu, mengibaskan tempat tidur, dan membaca dzikir/doa). (+)</div><div class="options-group"><label><input type="radio" name="q42" value="TP" required> TP</label><label><input type="radio" name="q42" value="KD"> KD</label><label><input type="radio" name="q42" value="SR"> SR</label><label><input type="radio" name="q42" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">43. Saya mampu mengatur waktu aktivitas malam sehingga seluruh tugas selesai sebelum jadwal tidur malam tiba. (+)</div><div class="options-group"><label><input type="radio" name="q43" value="TP" required> TP</label><label><input type="radio" name="q43" value="KD"> KD</label><label><input type="radio" name="q43" value="SR"> SR</label><label><input type="radio" name="q43" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">44. Saya sering bergadang, mengobrol, atau beraktivitas hingga larut malam melampaui aturan jam tidur yang ditetapkan. (-)</div><div class="options-group"><label><input type="radio" name="q44" value="TP" required> TP</label><label><input type="radio" name="q44" value="KD"> KD</label><label><input type="radio" name="q44" value="SR"> SR</label><label><input type="radio" name="q44" value="SL"> SL</label></div></div>
-        <div class="question-card"><div class="question-text">45. Saya sering langsung berbaring tidur tanpa melakukan wudhu terlebih dahulu atau tanpa membaca doa/dzikir tidur. (-)</div><div class="options-group"><label><input type="radio" name="q45" value="TP" required> TP</label><label><input type="radio" name="q45" value="KD"> KD</label><label><input type="radio" name="q45" value="SR"> SR</label><label><input type="radio" name="q45" value="SL"> SL</label></div></div>
-
-        <button type="submit" id="btnSubmit">KIRIM JAWABAN ANGKET</button>
+      <!-- Submit Button -->
+      <div class="pt-6">
+        <button type="submit" id="btnSubmit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transition duration-200 flex items-center justify-center gap-2">
+          <span>Kirim Asesmen Profil 7KAIH</span>
+        </button>
+      </div>
     </form>
-</div>
+  </div>
 
+  <!-- Modal Loading & Hasil -->
+  <div id="resultModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-5 text-center">
+      <div id="modalLoading" class="space-y-4 py-6">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-sky-600 border-t-transparent"></div>
+        <p class="text-slate-600 font-medium text-sm">Menghitung Skor & Menyimpan Profil 7KAIH Anda...</p>
+      </div>
 
-<script>
-  const SCRIPT_URL = 'https://script.google.com/a/macros/sma.belajar.id/s/AKfycbzSkgBlFUc0CGDH5TJ2SuUkU87MpCqJhwUD7s6bcKWihoEoBEI-Pwo5vE_-yff17IVR/exec';
-  const form = document.getElementById('kaihForm');
-  const btn = document.getElementById('btnSubmit');
-  
-  const statusBox = document.createElement('p');
-  statusBox.id = 'submitStatus';
-  statusBox.style.cssText = 'margin-top:14px;text-align:center;font-weight:600;';
-  btn.insertAdjacentElement('afterend', statusBox);
+      <div id="modalContent" class="hidden space-y-4 text-left">
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full mb-2">
+            ✓
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">Asesmen Berhasil Disimpan!</h3>
+          <p class="text-xs text-slate-500">Hasil perhitungan otomatis Profil 7KAIH Santri</p>
+        </div>
 
-  let sedangMengirim = false;
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
+          <p class="text-xs text-slate-500 uppercase font-semibold">Skor Total Akhir</p>
+          <p id="resScorePct" class="text-4xl font-extrabold text-sky-700 my-1">0%</p>
+          <p id="resKategori" class="text-sm font-bold text-emerald-700 bg-emerald-50 inline-block px-3 py-1 rounded-full mt-1 border border-emerald-200">-</p>
+        </div>
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (sedangMengirim) return;
-    if (!form.reportValidity()) return;
+        <div>
+          <p class="text-xs font-bold text-slate-700 mb-1">Rekomendasi & Tindak Lanjut:</p>
+          <p id="resDeskripsi" class="text-xs text-slate-600 leading-relaxed bg-amber-50 p-3 rounded-lg border border-amber-200">-</p>
+        </div>
 
-    const payload = {};
-    const formData = new FormData(form);
+        <button onclick="window.location.reload()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2.5 rounded-lg text-sm transition">
+          Selesai / Isi Baru
+        </button>
+      </div>
+    </div>
+  </div>
 
-    formData.forEach((value, key) => {
-      payload[key] = String(value).trim();
-    });
+  <script>
+    // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI
+    const SCRIPT_URL = "https://script.google.com/a/macros/sma.belajar.id/s/AKfycbz29uARNbPNstgegZpBn7nQbOsX2A5GP1nLJLLNuJS-WCeoXm2ZUJHTBOA7ZbgrcRWCQg/exec";
 
-    // Validasi kelengkapan 45 soal
-    for (let i = 1; i <= 45; i++) {
-      if (!payload['q' + i]) {
-        statusBox.style.color = '#b91c1c';
-        statusBox.textContent = 'Mohon lengkapi seluruh 45 pernyataan.';
-        const missing = form.querySelector('input[name="q' + i + '"]');
-        if (missing) missing.focus();
-        return;
+    const dimensions = [
+      {
+        title: "I. DIMENSI BANGUN PAGI (Building Morning Discipline)",
+        items: [
+          { id: 1, text: "Saya bangun secara mandiri sebelum azan Subuh berkumandang untuk melaksanakan Salat Qiyamul Lail." },
+          { id: 2, text: "Saya segera merapikan kasur, bantal, dan perlengkapan tidur sendiri tanpa perlu diingatkan musyrif." },
+          { id: 3, text: "Saya menyapa teman dan ustaz/ah di pagi hari menggunakan kalimat santun berbahasa Arab atau Inggris (misal: 'Sabahal khair' / 'Good morning')." },
+          { id: 4, text: "Saya sudah siap berpakaian rapi dan tiba di masjid 15 menit sebelum waktu Subuh dimulai." },
+          { id: 5, text: "Saya sering merasa berat untuk bangun pagi sehingga butuh dibangunkan berulang kali oleh teman atau musyrif." },
+          { id: 6, text: "Saya meninggalkan tempat tidur dalam kondisi berantakan karena terburu-buru mengejar waktu Subuh." },
+          { id: 7, text: "Saya merasa enggan mengucapkan sapaan pagi atau menggunakan kosakata bahasa asing saat berinteraksi di pagi hari." }
+        ]
+      },
+      {
+        title: "II. DIMENSI BERIBADAH (Devotional Excellence & Tahfidz)",
+        items: [
+          { id: 8, text: "Saya melaksanakan salat fardhu lima waktu secara berjamaah di masjid tepat pada waktunya di shaf terdepan." },
+          { id: 9, text: "Saya istiqamah menambah hafalan Al-Qur'an baru dan melakukan muraja'ah mandiri sesuai target halqah tahfidz." },
+          { id: 10, text: "Saya merutinkan pembacaan Surah Al-Waqi'ah & Ar-Rahman di sore hari, Surah Al-Kahfi pada Kamis malam, serta Al-Ma'tsurat setiap Jumat sore." },
+          { id: 11, text: "Saya membiasakan diri melaksanakan salat sunnah Rawatib dan menjaga adab-adab Islami dalam aktivitas sehari-hari." },
+          { id: 12, text: "Saya menunda-nunda berwudhu dan berangkat ke masjid ketika panggilan azan sudah berkumandang." },
+          { id: 13, text: "Saya jarang mengulang (muraja'ah) hafalan Al-Qur'an di luar jam setoran wajib dengan pengampu tahfidz." },
+          { id: 14, text: "Saya melewatkan pembacaan zikir Al-Ma'tsurat atau amalan Surah pilihan yang telah dijadwalkan oleh pihak pesantren." }
+        ]
+      },
+      {
+        title: "III. DIMENSI BEROLAHRAGA (Physical Fitness & Sportsmanship)",
+        items: [
+          { id: 15, text: "Saya berpartisipasi aktif dan antusias dalam kegiatan senam bersama atau olah tubuh yang dijadwalkan pesantren." },
+          { id: 16, text: "Saya menyempatkan waktu untuk berolahraga mandiri (seperti jogging, push-up, atau peregangan) demi menjaga kebugaran tubuh." },
+          { id: 17, text: "Saya aktif menggunakan kosakata istilah olahraga dalam bahasa Arab/Inggris (seperti 'workout', 'riyadhah', 'stretching') saat beraktivitas fisik." },
+          { id: 18, text: "Saya menjaga kesehatan dan ketahanan fisik agar senantiasa stamina prima dalam mengikuti rangkaian kegiatan asrama." },
+          { id: 19, text: "Saya sering mencari alasan atau bermalas-malasan untuk menghindari agenda senam dan kegiatan olahraga di pesantren." },
+          { id: 20, text: "Saya kurang mempedulikan kebugaran jasmani sehingga tubuh merasa lelah dan kurang bersemangat saat belajar." }
+        ]
+      },
+      {
+        title: "IV. DIMENSI MAKAN SEHAT BERGIZI (Nutrition & Sunnah Eating Adab)",
+        items: [
+          { id: 21, text: "Saya menerapkan adab makan sesuai sunnah Nabi SAW (membaca doa/basmalah, makan dengan tangan kanan, dan duduk tenang)." },
+          { id: 22, text: "Saya memilih jenis makanan dan minuman yang halal, thayyib (baik), serta memperhatikan keseimbangan gizi harian." },
+          { id: 23, text: "Saya mengambil porsi makan secukupnya dan selalu menghabiskannya tanpa menyisakan makanan sedikit pun (zero food waste)." },
+          { id: 24, text: "Saya menjaga kebersihan area ruang makan (muth'am) dan langsung mencuci alat makan pribadi setelah selesai digunakan." },
+          { id: 25, text: "Saya sering mengambil porsi makanan terlalu banyak sehingga menyisakan makanan yang akhirnya terbuang sia-sia." },
+          { id: 26, text: "Saya sering mengonsumsi makanan ringan/jajanan yang kurang sehat secara berlebihan di luar jam makan utama." }
+        ]
+      },
+      {
+        title: "V. DIMENSI GEMAR BELAJAR (Academic Passion & Bilingual Habit)",
+        items: [
+          { id: 27, text: "Saya mengikuti seluruh sesi belajar formal di sekolah maupun kelas diniyah di asrama dengan fokus dan penuh ketekunan." },
+          { id: 28, text: "Saya memiliki inisiatif untuk belajar mandiri dan aktif berdiskusi dalam kelompok (group study) untuk memahami materi." },
+          { id: 29, text: "Saya disiplin menerapkan pembiasaan percakapan bahasa asing (Bilingual Daily Habit Bahasa Arab & Inggris) setiap hari." },
+          { id: 30, text: "Saya rajin mencatat poin penting dari pengajaran ustaz/guru dan mengulas kembali (review) catatan pelajaran di waktu senggang." },
+          { id: 31, text: "Saya mudah merasa bosan, mengantuk, atau kehilangan konsentrasi pada saat proses pembelajaran sedang berlangsung." },
+          { id: 32, text: "Saya enggan membaca buku atau mengulang pelajaran jika tidak ada instruksi langsung atau jadwal ujian dari guru." }
+        ]
+      },
+      {
+        title: "VI. DIMENSI BERMASYARAKAT (Community Engagement & Muhasabah)",
+        items: [
+          { id: 33, text: "Saya aktif bergotong-royong bersama teman-teman dalam menjaga kebersihan, kerapian, dan keasrian lingkungan asrama." },
+          { id: 34, text: "Saya mengikuti kegiatan evaluasi diri bersama (Muhasabah) setiap malam dengan sungguh-sungguh dan khidmat." },
+          { id: 35, text: "Saya menunjukkan kepedulian, kepedulian sosial, serta siap membantu sesama santri yang sedang menghadapi kesulitan." },
+          { id: 36, text: "Saya dapat berkolaborasi dengan baik dalam kelompok dan mampu menunjukkan kepemimpinan yang positif (peer leadership)." },
+          { id: 37, text: "Saya acuh tak acuh dan kurang peduli terhadap kebersihan lingkungan fasilitas umum maupun area bersama di asrama." },
+          { id: 38, text: "Saya merasa enggan mengikuti atau menganggap tidak penting sesi muhasabah malam bersama teman-teman asrama." },
+          { id: 39, text: "Saya cenderung bersikap mementingkan diri sendiri dan enggan bekerja sama dalam agenda kebersamaan santri." }
+        ]
+      },
+      {
+        title: "VII. DIMENSI TIDUR CEPAT (Night Sleep Hygiene & Lights Out)",
+        items: [
+          { id: 40, text: "Saya mematuhi jadwal istirahat malam dan siap tidur tepat waktu saat instruksi pemadaman lampu (Lights Out) diberlakukan." },
+          { id: 41, text: "Saya taat aturan untuk tidak menyimpan atau menggunakan gawai/perangkat elektronik saat jam istirahat malam." },
+          { id: 42, text: "Saya selalu melakukan adab sebelum tidur secara konsisten (mengambil wudhu, mengibaskan tempat tidur, dan membaca dzikir/doa)." },
+          { id: 43, text: "Saya mampu mengatur waktu aktivitas malam sehingga seluruh tugas selesai sebelum jadwal tidur malam tiba." },
+          { id: 44, text: "Saya sering bergadang, mengobrol, atau beraktivitas hingga larut malam melampaui aturan jam tidur yang ditetapkan." },
+          { id: 45, text: "Saya sering langsung berbaring tidur tanpa melakukan wudhu terlebih dahulu atau tanpa membaca doa/dzikir tidur." }
+        ]
       }
+    ];
+
+    const options = [
+      { val: "TP", label: "TP (Tidak Pernah)" },
+      { val: "KD", label: "KD (Kadang-kadang)" },
+      { val: "SR", label: "SR (Sering)" },
+      { val: "SL", label: "SL (Selalu)" }
+    ];
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      let html = '';
+
+      dimensions.forEach((dim, dimIdx) => {
+        html += `
+          <div class="bg-slate-50/70 p-5 sm:p-6 rounded-xl border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2 border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 bg-teal-700 text-white rounded-full flex items-center justify-center text-xs font-bold">${dimIdx + 2}</span>
+              ${dim.title}
+            </h3>
+            <div class="space-y-6">
+        `;
+
+        dim.items.forEach(item => {
+          html += `
+            <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-sm space-y-3">
+              <p class="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
+                <span class="font-bold text-sky-700">${item.id}.</span> ${item.text}
+              </p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                ${options.map(opt => `
+                  <label class="flex items-center gap-2 border border-slate-200 hover:border-sky-500 rounded-lg p-2 cursor-pointer transition text-xs font-medium text-slate-700 hover:bg-sky-50/50">
+                    <input type="radio" name="p${item.id}" value="${opt.val}" required class="text-sky-600 focus:ring-sky-500">
+                    <span>${opt.label}</span>
+                  </label>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div></div>`;
+      });
+
+      container.innerHTML = html;
     }
 
-    payload.requestId = 'KAIH-' + Date.now();
+    document.querySelector('input[name="tanggalPengisian"]').valueAsDate = new Date();
+    renderQuestions();
 
-    sedangMengirim = true;
-    btn.disabled = true;
-    btn.innerText = 'Mengirim data...';
-    statusBox.style.color = '#1d4ed8';
-    statusBox.textContent = 'Sedang menyimpan jawaban ke database...';
+    // Pengiriman Data via HTTP POST Fetch ke Google Apps Script
+    document.getElementById('angketForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const modal = document.getElementById('resultModal');
+      const loading = document.getElementById('modalLoading');
+      const content = document.getElementById('modalContent');
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      loading.classList.remove('hidden');
+      content.classList.add('hidden');
 
-    // Pengiriman JSON dengan mode no-cors
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(() => {
-      sedangMengirim = false;
-      btn.disabled = false;
-      btn.innerText = 'KIRIM JAWABAN ANGKET';
-      statusBox.style.color = '#166534';
-      statusBox.textContent = 'Alhamdulillah, jawaban angket 7KAIH Anda berhasil disimpan!';
-      form.reset();
-    })
-    .catch(err => {
-      sedangMengirim = false;
-      btn.disabled = false;
-      btn.innerText = 'KIRIM JAWABAN ANGKET';
-      statusBox.style.color = '#b91c1c';
-      statusBox.textContent = 'Terjadi kesalahan koneksi. Silakan periksa jaringan internet Anda.';
+      const formData = new FormData(this);
+      const urlParams = new URLSearchParams(formData);
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: urlParams
+      })
+      .then(response => response.json())
+      .then(res => {
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+
+        if (res.status === 'success') {
+          document.getElementById('resScorePct').innerText = res.totalPct + '%';
+          document.getElementById('resKategori').innerText = res.kategori;
+          document.getElementById('resDeskripsi').innerText = res.deskripsi;
+        } else {
+          alert('Terjadi kesalahan: ' + res.message);
+          modal.classList.add('hidden');
+        }
+      })
+      .catch(err => {
+        loading.classList.add('hidden');
+        alert('Gagal mengirim data: ' + err);
+        modal.classList.add('hidden');
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
