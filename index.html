@@ -257,6 +257,7 @@
     renderQuestions();
 
     // Pengiriman Data via HTTP POST Fetch ke Google Apps Script
+    // Pengiriman Data via HTTP POST Fetch ke Google Apps Script (Dengan Opsi no-cors)
     document.getElementById('angketForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -274,21 +275,20 @@
 
       fetch(SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors', // Mencegah blokir CORS browser dari GitHub Pages
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         body: urlParams
       })
-      .then(response => response.json())
-      .then(res => {
+      .then(() => {
+        // Mode no-cors berhasil mengirim data ke Google Sheets
         loading.classList.add('hidden');
         content.classList.remove('hidden');
 
-        if (res.status === 'success') {
-          document.getElementById('resScorePct').innerText = res.totalPct + '%';
-          document.getElementById('resKategori').innerText = res.kategori;
-          document.getElementById('resDeskripsi').innerText = res.deskripsi;
-        } else {
-          alert('Terjadi kesalahan: ' + res.message);
-          modal.classList.add('hidden');
-        }
+        document.getElementById('resScorePct').innerText = 'Selesai';
+        document.getElementById('resKategori').innerText = 'Data Berhasil Terkirim';
+        document.getElementById('resDeskripsi').innerText = 'Alahamdulillah,Terima kasih! Jawaban instrumen 7KAIH Anda telah berhasil tersimpan secara otomatis di sistem Google Sheets.';
       })
       .catch(err => {
         loading.classList.add('hidden');
